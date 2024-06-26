@@ -7,7 +7,13 @@ const bcrypt = require("bcryptjs");
 router.post("/register", async (req, res) => {
   try {
     const { email, username, password } = req.body;
-
+      const existingUser=await User.findOne({email});
+      if(existingUser)
+        {
+          return res
+          .status(200)
+          .json({message:"User with this email already exists"});
+        }
     const hashpassword = bcrypt.hashSync(password);
     const user = new User({ email, username, password: hashpassword });
     await user

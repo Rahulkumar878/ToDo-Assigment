@@ -20,7 +20,7 @@ const Signup = () => {
     await axios
       .post("http://localhost:1000/api/v1/register", Inputs)
       .then((response) => {
-        if (response.data.message == "User Already Exists") {
+        if (response.data.message == "User with this email already exists") {
           alert(response.data.message);
         } else {
           alert(response.data.message);
